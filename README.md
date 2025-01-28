@@ -68,7 +68,7 @@ ASSUMPTIONS
 ---------------------------
 
 1. Data Generation:
-   - Fake user data is generated using the `Faker` library.
+   - Fake user data is generated using the `Faker` library (installed as part of the Docker image).
    - A predefined list of email domains is used.
 
 2. Data Transformation:
@@ -77,7 +77,7 @@ ASSUMPTIONS
    - Rows with invalid emails are handled gracefully.
 
 3. Database Connection:
-   - The ETL app connects to PostgreSQL using the hostname `postgres`, which resolves via Docker Compose networking.
+   - The ETL app connects to PostgreSQL using the hostname `postgres`, which resolves via Docker Compose networking. `psycopg2` library is installed as part of the Docker image
 
 4. Data Persistence:
    - PostgreSQL data is stored in a named volume (`postgres_data`) to ensure persistence across container restarts.
