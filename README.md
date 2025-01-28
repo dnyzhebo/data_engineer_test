@@ -14,21 +14,6 @@ Prerequisites:
 - Docker and Docker Compose installed on your system.
 - Basic knowledge of Docker and command-line tools.
 
-
-Project Structure:
-data_engineer_test/
-    ├── data/                       # Directory for CSV files (auto-created or mounted)
-    ├── etl/
-    │   ├── __init__.py             # Marks the ETL directory as a Python package
-    │   ├── generate_csv.py         # Script to generate fake user data
-    │   ├── transform.py            # Script to transform data
-    │   ├── load.py                 # Script to load data into PostgreSQL
-    ├── main.py                     # Entry point to orchestrate the ETL process
-    ├── Dockerfile                  # Dockerfile to containerize the ETL app
-    ├── docker-compose.yml          # Docker Compose configuration
-    ├── .env                        # Environment variables for database configuration
-    ├── README.txt                  # Documentation (Plain Text)
-
 ---------------------------
 HOW TO BUILD AND RUN DOCKER CONTAINERS
 ---------------------------
