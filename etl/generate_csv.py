@@ -6,12 +6,6 @@ from datetime import datetime, timedelta
 # Initialize Faker for generating fake data
 faker = Faker()
 
-# Number of records to generate
-num_records = 1000
-
-# Define the output file path
-output_file = "data/data.csv"
-
 # Predefined list of email domains
 email_domains = [
     "example.com",
@@ -25,7 +19,6 @@ email_domains = [
     "randomdomain.co"
 ]
 
-
 def generate_random_datetime(start_date, end_date):
     """
     Generate a random datetime between start_date and end_date.
@@ -36,6 +29,11 @@ def generate_random_datetime(start_date, end_date):
 
 
 def generate_csv(file_path, num_records):
+    """
+    Generate a CSV file with fake user data.
+    :param file_path: Path to save the generated CSV file.
+    :param num_records: Number of records to generate.
+    """
     with open(file_path, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["user_id", "name", "email", "signup_date"])
@@ -59,5 +57,9 @@ def generate_csv(file_path, num_records):
     print(f"CSV file '{file_path}' successfully created with {num_records} records.")
 
 
+# Allow standalone execution for testing
 if __name__ == "__main__":
+    # Default parameters for standalone execution
+    output_file = "data/data.csv"
+    num_records = 1000
     generate_csv(output_file, num_records)

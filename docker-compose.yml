@@ -11,6 +11,26 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U etl_user"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  etl_app:
+    build:
+      context: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_HOST: postgres
+      DATABASE_NAME: etl_db
+      DATABASE_USER: etl_user
+      DATABASE_PASSWORD: secure_password_123
+      DATABASE_PORT: 5432
+    volumes:
+      - ./data:/app/data
 
 volumes:
-  postgres_data:
+  postgres_data:  # Ensure this is defined

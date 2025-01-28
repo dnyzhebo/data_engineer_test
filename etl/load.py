@@ -1,9 +1,24 @@
 import csv
 import psycopg2
+import os
 
-def load_to_postgres(file_path, db_config):
-    # Connect to the PostgreSQL database
+def load_to_postgres(file_path):
+    """
+    Load transformed CSV data into a PostgreSQL database.
+
+    :param file_path: Path to the transformed CSV file.
+    """
+    # Get database configuration from environment variables
+    db_config = {
+        "host": os.getenv("DATABASE_HOST", "localhost"),
+        "database": os.getenv("DATABASE_NAME", "etl_db"),
+        "user": os.getenv("DATABASE_USER", "etl_user"),
+        "password": os.getenv("DATABASE_PASSWORD", "secure_password_123"),
+        "port": int(os.getenv("DATABASE_PORT", 5432)),
+    }
+
     try:
+        # Connect to PostgreSQL
         conn = psycopg2.connect(**db_config)
         cursor = conn.cursor()
 
@@ -44,13 +59,5 @@ if __name__ == "__main__":
     # Path to the transformed CSV file
     file_path = "data/transformed.csv"
 
-    # PostgreSQL database configuration
-    db_config = {
-        "host": "localhost",
-        "database": "etl_db",
-        "user": "postgres",
-        "password": "your_password",
-        "port": 5432
-    }
-
-    load_to_postgres(file_path, db_config)
+    # Call the function to load data into PostgreSQL
+    load_to_postgres(file_path)
